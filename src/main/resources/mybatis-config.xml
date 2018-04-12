@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<!-- 
+	XML 配置文件（configuration XML）中包含了对 MyBatis 系统的核心设置，
+	包含获取数据库连接实例的数据源（DataSource）和决定事务作用域和控制方式的事务管理器（TransactionManager）。
+ -->
+ <!-- 
+ 	XML映射配置文件详解：
+ 	configuration 配置
+
+	    properties 属性
+	    settings 设置
+	    typeAliases 类型别名
+	    typeHandlers 类型处理器
+	    objectFactory 对象工厂
+	    plugins 插件
+	    environments 环境
+	        environment 环境变量
+	            transactionManager 事务管理器
+	            dataSource 数据源
+	    databaseIdProvider 数据库厂商标识
+	    mappers 映射器
+ 	
+  -->
+<configuration>
+	<!-- 
+		properties:这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。
+			然后就可以在整个配置文件中被用来替换需要动态配置的属性值。比如dataSource元素中的${driver}用法。
+			
+			这个例子中的 username 和 password 将会由 properties 元素中设置的相应值来替换。
+			driver 和 url 属性将会由 config.properties 文件中对应的值来替换。这样就为配置提供了诸多灵活选择。
+			
+	 -->
+	<properties resource="org/mybatis/example/config.properties">
+		<property name="username" value="dev_user"/>
+		<property name="password" value="F2Fa3!33TYyg"/>
+	</properties>
+
+	 <environments default="development">
+	   <environment id="development">
+	     <transactionManager type="JDBC"/><!-- 事物管理器 -->
+	     <dataSource type="POOLED"><!-- 包含获取数据库连接实例的数据源  -->
+	       <property name="driver" value="${driver}"/>
+	       <property name="url" value="${url}"/>
+	       <property name="username" value="${username}"/>
+	       <property name="password" value="${password}"/>
+	     </dataSource>
+	   </environment>
+	 </environments>
+	 <mappers>
+	   <mapper resource="/src/main/resources/BlogerMapper.xml"/>
+	 </mappers>
+</configuration>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 
+  	命名空间（Namespaces）在之前版本的 MyBatis 中是可选的，这样容易引起混淆因此毫无益处。
+  	现在命名空间则是必须的，且意于简单地用更长的完全限定名来隔离语句。
+
+	命名空间使得你所见到的接口绑定成为可能，尽管你觉得这些东西未必用得上，你还是应该遵循这里的规定以防哪天你改变了主意。
+	出于长远考虑，使用命名空间，并将它置于合适的 Java 包命名空间之下，你将拥有一份更加整洁的代码并提高了 MyBatis 的可用性。
+
+	命名解析：为了减少输入量，MyBatis 对所有的命名配置元素（包括语句，结果映射，缓存等）使用了如下的命名解析规则。
+
+  	  完全限定名（比如“com.mypackage.MyMapper.selectAllThings”）将被直接查找并且找到即用。
+              短名称（比如“selectAllThings”）如果全局唯一也可以作为一个单独的引用。
+              如果不唯一，有两个或两个以上的相同名称（比如“com.foo.selectAllThings ”和“com.bar.selectAllThings”），那么使用时就会收到错误报告说短名称是不唯一的，这种情况下就必须使用完全限定名。
+  	
+   -->
+<mapper namespace="com.robinliew.mapper.BlogMapper">
+  <!-- 
+	在一个 XML 映射文件中，你想定义多少个映射语句都是可以的，这样下来，XML 头部和文档类型声明占去的部分就显得微不足道了。
+	文件的剩余部分具有很好的自解释性。在命名空间“com.robinliew.mapper.BlogMapper”中定义了一个名为“selectBlog”的映射语句，
+	这样它就允许你使用指定的完全限定名“com.robinliew.mapper.BlogMapper.selectBlog”来调用映射语句
+  -->
+  <select id="selectBlog" resultType="Blog">
+    select * from Blog where id = #{id}
+  </select>
+</mapper>
